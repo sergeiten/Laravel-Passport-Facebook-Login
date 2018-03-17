@@ -70,7 +70,10 @@ trait FacebookLoginTrait
                         $user->{$name_column} = $fbUser['first_name'] . ' ' . $fbUser['last_name'];
                     }
 
-                    $user->{$email_column}    = $fbUser['email'];
+                    if (!empty($email_column) && !empty($fbUser['email'])) {
+                        $user->{$email_column} = $fbUser['email'];
+                    }
+
                     $user->{$password_column} = bcrypt(uniqid('fb_', true)); // Random password.
                     $user->save();
 
