@@ -36,7 +36,7 @@ trait FacebookLoginTrait
                 /**
                  * Make the Facebook request.
                  */
-                $response = $fb->get('/me?locale=en_GB&fields=first_name,last_name,email');
+                $response = $fb->get('/me?locale=en_GB&fields=first_name,last_name,email,verified,link');
                 $fbUser = $response->getDecodedBody();
 
                 /**
@@ -53,6 +53,7 @@ trait FacebookLoginTrait
                 $last_name_column   = config('facebook.registration.last_name', 'last_name');
                 $email_column       = config('facebook.registration.email', 'email');
                 $password_column    = config('facebook.registration.password', 'password');
+                $user_picture       = config('facebook.registration.user_picture');
 
                 $user = $userModel::where($facebook_id_column, $fbUser['id'])->first();
 
@@ -70,10 +71,13 @@ trait FacebookLoginTrait
                         $user->{$name_column} = $fbUser['first_name'] . ' ' . $fbUser['last_name'];
                     }
 
-                    if (!empty($email_column) && !empty($fbUser['email'])) {
-                        $user->{$email_column} = $fbUser['email'];
+                    if (!empty($user_picture) && !empty($fbUser['id'])) {
+                        $avatarUrl = 'https://graph.facebook.com/'.$fb->getDefaultGraphVersion().'/'.$fbUser['id'].'/picture';
+
+                        $user->{$user_picture} = $avatarUrl;
                     }
 
+                    $user->{$email_column}    = $fbUser['email'];
                     $user->{$password_column} = bcrypt(uniqid('fb_', true)); // Random password.
                     $user->save();
 
