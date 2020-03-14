@@ -23,7 +23,7 @@
         }
     },
     "require": {
-        "laravel/passport": "^5.0",
+        "laravel/passport": "^5.0||^6.0||^7.0",
         "facebook/graph-sdk": "^5.6"
     }
 }
