@@ -1,5 +1,5 @@
 {
-    "name": "danjdewhurst/laravel-passport-facebook-login",
+    "name": "sergeiten/laravel-passport-facebook-login",
     "description": "Facebook Token Request Grant for Laravel Passport",
     "license": "MIT",
     "keywords": ["laravel", "lumen", "passport", "oauth", "grant"],
@@ -11,11 +11,15 @@
         {
             "name": "Daniel Dewhurst",
             "email": "danjdewhurst@gmail.com"
+        },
+        {
+            "name": "Sergei Ten",
+            "email": "sergei.ten@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Danjdewhurst\\PassportFacebookLogin\\": "src"
+            "SergeiTen\\PassportFacebookLogin\\": "src"
         }
     },
     "require": {

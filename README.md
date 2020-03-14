@@ -4,7 +4,7 @@ Provides a new Laravel Passport Grant Client named `facebook_login`, allowing yo
 A new user will be created (and optionally assigned to an role - `$user->attachRole(ID)`) if the email address doesn't exist.
 
 ## Installation:
-Install with composer `composer require danjdewhurst/laravel-passport-facebook-login`. Use major version 1 for Passport 4 and below Laravel 5.6 compatibility.
+Install with composer `composer require sergeiten/laravel-passport-facebook-login`. Use major version 1 for Passport 4 and below Laravel 5.6 compatibility.
 
 ### Versions:
 * Laravel 5.6 and Passport 5.0 only supported at this time
@@ -14,8 +14,8 @@ Install with composer `composer require danjdewhurst/laravel-passport-facebook-l
 * `"facebook/graph-sdk": "~5.6"`
 
 ## Setup:
-* Add `Danjdewhurst\PassportFacebookLogin\FacebookLoginGrantProvider::class` to your list of providers **after** `Laravel\Passport\PassportServiceProvider`.
-* Add `Danjdewhurst\PassportFacebookLogin\FacebookLoginTrait` Trait to your `User` model (or whatever model you have configured to work with Passport).
+* Add `SergeiTen\PassportFacebookLogin\FacebookLoginGrantProvider::class` to your list of providers **after** `Laravel\Passport\PassportServiceProvider`.
+* Add `SergeiTen\PassportFacebookLogin\FacebookLoginTrait` Trait to your `User` model (or whatever model you have configured to work with Passport).
 * Run `php artisan vendor:publish`, this will create a `config/facebook.php` file.
 * Enter your Facebook App details in your `.env` file: `FACEBOOK_APP_ID` and `FACEBOOK_APP_SECRET`.
 * Optional: To automatically attach a role (https://github.com/Zizaco/entrust) to new users, use the 'ATTACH_ROLE' env setting.
@@ -54,6 +54,7 @@ Install with composer `composer require danjdewhurst/laravel-passport-facebook-l
         'last_name'   => env('LAST_NAME_COLUMN', 'last_name'),
         'name'        => env('NAME_COLUMN', 'name'),
         'attach_role' => env('ATTACH_ROLE', null),
+        'user_picture' => env('USER_PICTURE', null),
     ],
 ```
 
@@ -68,11 +69,12 @@ Install with composer `composer require danjdewhurst/laravel-passport-facebook-l
 * An `access_token` and `refresh_token` will be returned if successful.
 
 ## Assumptions:
-* Your `User` model has the folowing fields:
+* Your `User` model has the following fields:
 * * `facebook_id`
 * * `name` or `first_name` & `last_name`
 * * `email`
 * * `password`
+* * `picture` facebook user picture
 
 ## Why not use Laravel 5.5's auto-discovery?
 

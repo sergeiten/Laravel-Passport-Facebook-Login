@@ -33,5 +33,6 @@ return [
         'last_name'   => env('LAST_NAME_COLUMN', 'last_name'),
         'name'        => env('NAME_COLUMN', 'name'),
         'attach_role' => env('ATTACH_ROLE', null),
+        'user_picture' => env('USER_PICTURE', null),
     ],
 ];
